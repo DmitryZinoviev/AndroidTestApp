@@ -12,14 +12,20 @@ using Android.Widget;
 
 namespace ActivityLifecycleDemo
 {
-    [Activity(Label = "SecondActivity", Theme = "@android:style/Theme.Dialog")]
+    [Activity(Label = "SecondActivity")]
     public class SecondActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Second);
+            var log = FindViewById<TextView>(Resource.Id.SecondText);
+            
+
+            log.Text = Intent.GetStringExtra(MainActivity.TEXT_KEY);
             // Create your application here
+            //Android.Util.Log
+
         }
     }
 }

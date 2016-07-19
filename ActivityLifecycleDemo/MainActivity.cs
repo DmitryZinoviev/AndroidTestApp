@@ -1,7 +1,9 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Java.Interop;
@@ -25,16 +27,18 @@ namespace ActivityLifecycleDemo
 
             _logTextView = FindViewById<TextView>(Resource.Id.log);
 
-            //if (bundle != null)
-            //{
-            //    _logTextView.Text = bundle.GetString(TEXT_KEY);
-            //    _number = bundle.GetInt(NUMBER_KEY);
-            //}
+            if (bundle != null)
+            {
+                _logTextView.Text = bundle.GetString(TEXT_KEY);
+                _number = bundle.GetInt(NUMBER_KEY);
+            }
 
             writeLog("OnCreate");
 
             _button = FindViewById<Button>(Resource.Id.ButtonShowSecondActivity);
             _button.Click += _button_Click;
+            
+
         }
 
 
@@ -42,7 +46,13 @@ namespace ActivityLifecycleDemo
         #region Button
         private void _button_Click(object sender, EventArgs e)
         {
-            Intent intent = new Intent(this, typeof(SecondActivity));
+            var uri = Android.Net.Uri.Parse("tel:1112223333");
+
+            Intent intent = new Intent(Intent.ActionCall, uri);
+            
+            //Intent intent = new Intent(this, typeof(SecondActivity));
+            
+            //intent.p(TEXT_KEY, _logTextView.Text);
             StartActivity(intent);
         }
 
@@ -60,9 +70,9 @@ namespace ActivityLifecycleDemo
         private void writeLog(string text)
         {
 
-            _logTextView.Text +=
-                String.Format("{3} {0:T}: {1}{2}", DateTime.Now, text, Environment.NewLine, _number++);
-
+            //_logTextView.Text +=
+            //    String.Format("{3} {0:T}: {1}{2}", DateTime.Now, text, Environment.NewLine, _number++);
+            Log.Debug("Lifecycle", "{3} {0:T}: {1}{2}", DateTime.Now, text, Environment.NewLine, _number++);
         }
 
         protected override void OnStart()
@@ -89,6 +99,7 @@ namespace ActivityLifecycleDemo
         {
             base.OnStop();
             writeLog("OnStop");
+            
 
         }
 
@@ -109,7 +120,7 @@ namespace ActivityLifecycleDemo
 
         #endregion
 
-#region Save State
+        #region Save State
 
         public const String NUMBER_KEY = "NUMBER_KEY";
 
