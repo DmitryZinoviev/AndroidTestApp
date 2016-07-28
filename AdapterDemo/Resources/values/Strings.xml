@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Hello">Hello World, Click Me!</string>
+    <string name="ApplicationName">AdapterDemo</string>
+  
+  <string-array name="Models">
+    <item>model 1</item>
+    <item>model 2</item>
+    <item>model 3</item>
+    <item>model 4</item>
+    <item>model 5</item>
+    <item>model 6</item>
+    <item>model 7</item>
+    <item>model 8</item>
+    <item>model 9</item>
+    <item>model 10</item>
+    <item>model 11</item>
+    <item>model 12</item>
+    <item>model 13</item>
+    <item>model 14</item>
+    <item>model 15</item>
+  </string-array>
+</resources>
