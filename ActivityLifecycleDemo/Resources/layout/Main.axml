@@ -9,7 +9,12 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonText1"
         android:onClick="OnClick" />
-    <ScrollView
+  <Button
+      android:id="@+id/SendButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Send" />
+  <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scrollbars="vertical">

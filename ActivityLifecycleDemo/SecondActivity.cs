@@ -13,6 +13,8 @@ using Android.Widget;
 namespace ActivityLifecycleDemo
 {
     [Activity(Label = "SecondActivity")]
+    [IntentFilter(new [] { Intent.ActionSend}, Categories = new[] {
+    Intent.CategoryDefault}, DataMimeType = "*/*")]
     public class SecondActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

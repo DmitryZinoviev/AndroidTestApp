@@ -37,22 +37,42 @@ namespace ActivityLifecycleDemo
 
             _button = FindViewById<Button>(Resource.Id.ButtonShowSecondActivity);
             _button.Click += _button_Click;
-            
 
+
+
+            var sendButton = FindViewById<Button>(Resource.Id.SendButton);
+
+            sendButton.Click += SendButtonOnClick;
+        }
+        private void SendButtonOnClick(object sender, EventArgs eventArgs)
+        {
+            sendEmail("test@mail.com", "my new text");
         }
 
+        public bool sendEmail(string emailAddress, string text)
+        {
+            var intent = new Intent(Intent.ActionSend);
+            intent.SetType("message/rfc822");
+            intent.PutExtra(Intent.ExtraEmail, new[] { emailAddress });
+            intent.PutExtra(Intent.ExtraText, text);
+
+            StartActivity(intent);
+            //StartActivity(new Intent(intent, "test mail text"));
+            //StartActivity(Intent.CreateChooser(intent, "test mail text"));
+            return true;
+        }
 
 
         #region Button
         private void _button_Click(object sender, EventArgs e)
         {
-            var uri = Android.Net.Uri.Parse("tel:1112223333");
+            //var uri = Android.Net.Uri.Parse("tel:1112223333");
 
-            Intent intent = new Intent(Intent.ActionCall, uri);
-            
-            //Intent intent = new Intent(this, typeof(SecondActivity));
-            
-            //intent.p(TEXT_KEY, _logTextView.Text);
+            //Intent intent = new Intent(Intent.ActionCall, uri);
+
+            Intent intent = new Intent(this, typeof(SecondActivity));
+
+            intent.PutExtra(TEXT_KEY, _logTextView.Text);
             StartActivity(intent);
         }
 
@@ -70,9 +90,9 @@ namespace ActivityLifecycleDemo
         private void writeLog(string text)
         {
 
-            //_logTextView.Text +=
-            //    String.Format("{3} {0:T}: {1}{2}", DateTime.Now, text, Environment.NewLine, _number++);
-            Log.Debug("Lifecycle", "{3} {0:T}: {1}{2}", DateTime.Now, text, Environment.NewLine, _number++);
+            _logTextView.Text +=
+                String.Format("{3} {0:T}: {1}{2}", DateTime.Now, text, Environment.NewLine, _number++);
+            //Log.Debug("Lifecycle", "{3} {0:T}: {1}{2}", DateTime.Now, text, Environment.NewLine, _number++);
         }
 
         protected override void OnStart()
